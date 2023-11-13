@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-main: rgb(56, 56, 56);
+  --color-bg: #f5f5f5;
+  --color-highlight: rgb(255, 251, 0);
+}
+
+html {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  background-color: var(--color-bg);
+  color: var(--color-main);
+}
+
+html,
+body,
+main,
+.checkbox-area {
+  height: 100%;
+}
+
+.checkbox-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox-field {
+  margin: 1rem;
+}
