@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-main: rgb(56, 56, 56);
+  --color-bg: #ffffff;
+  --color-highlight: gold;
+}
+
+html {
+  font-family: "Manrope", sans-serif;
+
+  font-size: 19px;
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-main);
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  background-color: var(--color-highlight);
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.btn {
+  background-color: var(--color-bg);
+  border: 0.25rem solid var(--color-main);
+  font-weight: 700;
+  padding: 0.5rem;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  --width: 0%; /* variable für width erstellen */
+  background-image: linear-gradient(
+    to right,
+    var(--color-highlight) var(--width),
+    var(--color-bg) var(--width)
+  );
+}
+
+#counter {
+  font-size: 7rem;
+  font-weight: 700;
+}
