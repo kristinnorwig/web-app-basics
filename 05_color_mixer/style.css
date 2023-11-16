@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  background-color: white;
+  color: black;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+input#red {
+  accent-color: red;
+  background-color: white;
+  border: 0.1 rem solid black;
+}
+
+input#green {
+  accent-color: green;
+  background-color: white;
+}
+
+input#blue {
+  accent-color: blue;
+  background-color: white;
+}
+
+input {
+  margin-left: 1rem;
+}
+
+label,
+#color-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
