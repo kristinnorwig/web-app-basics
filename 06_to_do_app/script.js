@@ -21,7 +21,7 @@ if (localStorage.getItem("state")) {
 
 showTodos();
 
-// Todos aus Array mit HTML "verknüpfen" mit Funktion
+// Todos aus Array mit HTML "verknüpfen" mit Funktion = JS sichtbar machen
 function showTodos() {
   const list = document.querySelector("#todo-list"); // <ul>
   list.innerHTML = "";
@@ -51,7 +51,7 @@ function showTodos() {
 
     newTodoLi.appendChild(label);
 
-    /* Text für li anlegen aus description des Objekts
+    /* Text für li anlegen aus description des Objekts (Alternative)
     const todoText = document.createTextNode(todo.description);
     newTodoLi.append(todoText);*/
 
@@ -63,7 +63,7 @@ function showTodos() {
 showTodos();
 
 function addTodo(event) {
-  event.preventDefault();
+  event.preventDefault(); // Wegen <form>
   const currInput = document.querySelector("#new-todo");
   const description = currInput.value;
   // console.log(description);
@@ -77,10 +77,10 @@ function addTodo(event) {
 
   // Prüfung auf doppelte Eingabe, ist Todo bereits vorhanden?
   function isDescrDoubled(currInput) {
-    for (let index = 0; index < allTodos.length; index++) {
+    for (let index = 0; index < state.todos.length; index++) {
       //durch Array itterieren und aktuellen index mit input vergleichen
       if (
-        allTodos[index].description.toLowerCase() === currInput.toLowerCase()
+        state.todos[index].description.toLowerCase() === currInput.toLowerCase()
       ) {
         return true; // Duplikat gefunden
       }
@@ -95,14 +95,14 @@ function addTodo(event) {
     return;
   }
 
-  // Neues Todo-Objekt erstellen
+  // Neues Todo-Objekt erstellen und in bestehendes Array pushen
   const newTodo = {
     description: description,
     done: false,
     id: idGenerator(),
   };
 
-  allTodos.push(newTodo);
+  state.todos.push(newTodo);
 
   localStorage.setItem("state", JSON.stringify(state));
 
@@ -115,6 +115,7 @@ function addTodo(event) {
 const addBtn = document.querySelector("#add-btn");
 addBtn.addEventListener("click", addTodo);
 
+//Variable für Erstellung der ID, nach oben Zählen
 let idCounter = 0;
 
 function idGenerator() {
@@ -126,15 +127,15 @@ const removeBtn = document.querySelector("#remove-btn");
 removeBtn.addEventListener("click", removeDoneTodos);
 
 function removeDoneTodos() {
-  const activeTodos = [];
+  const openTodos = [];
 
   for (let i = 0; i < state.todos.length; i++) {
     if (state.todos[i].done === false) {
-      activeTodos.push(state.todos[i]);
+      openTodos.push(state.todos[i]);
     }
   }
 
-  state.todos = activeTodos;
+  state.todos = openTodos;
 
   localStorage.setItem("state", JSON.stringify(state));
 
