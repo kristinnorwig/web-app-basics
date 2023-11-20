@@ -14,16 +14,20 @@
     </header>
     <main>
         <form>
-            <label for="all-checkbox">All</label>
-            <input type="radio" id="all-checkbox" name="all-checkbox" />
-            <br>
-            <label for="open-checkbox">Open</label>
-            <input type="radio" id="open-checkbox" name="open-checkbox" />
-            <br>
-            <label for="done-checkbox">Done</label>
-            <input type="radio" id="done-checkbox" name="done-checkbox" />
+            <div class="filter-bar">
+                <label for="all-checkbox">All</label>
+                <input type="radio" id="all-checkbox" name="all-checkbox" />
+            </div>
+            <div class="filter-bar">
+                <label for="open-checkbox">Open</label>
+                <input type="radio" id="open-checkbox" name="open-checkbox" />
+            </div class="filter-bar">
+            <div>
+                <label for="done-checkbox">Done</label>
+                <input type="radio" id="done-checkbox" name="done-checkbox" />
+            </div>
         </form>
-        <button>Remove done Todos</button>
+        <button id="remove-btn">Remove done Todos</button>
         <br>
         <input type="text" id="new-todo" name="new-todo" placeholder="add new todo...">
         <button id="add-btn">Add</button>
