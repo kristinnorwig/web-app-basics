@@ -1,4 +1,9 @@
 // Variable aller Todos als Array mit einzelnen Todos als Objekt anlegen
+/*const allTodos = [
+  { description: "Einkaufen", done: true, id: 1 },
+  { description: "Putzen", done: false, id: 2 },
+]; */
+// state anlegen für spätere Arbeit mit Backend-Daten
 
 let state;
 
