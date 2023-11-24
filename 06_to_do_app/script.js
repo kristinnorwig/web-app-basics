@@ -7,10 +7,11 @@
 
 let state;
 
+//lade LocalStorage
 if (localStorage.getItem("state")) {
   state = JSON.parse(localStorage.getItem("state"));
 } else {
-  // wenn der localStorage leer ist, zeige folgendes an
+  // wenn der LocalStorage leer ist, zeige folgendes an
   state = {
     todos: [
       { description: "Einkaufen", done: true, id: 1 },
@@ -133,11 +134,18 @@ removeBtn.addEventListener("click", removeDoneTodos);
 function removeDoneTodos() {
   const openTodos = [];
 
-  for (let i = 0; i < state.todos.length; i++) {
+  // alle Todos des states durchgehen
+  for (const todo of state.todos) {
+    if (todo.done === false) {
+      openTodos.push(todo);
+    }
+  }
+
+  /*  for (let i = 0; i < state.todos.length; i++) {
     if (state.todos[i].done === false) {
       openTodos.push(state.todos[i]);
     }
-  }
+  } */
 
   state.todos = openTodos;
 
@@ -146,27 +154,28 @@ function removeDoneTodos() {
   showTodos();
 }
 
-//Filter function noch in Arbeit
+//Filter function
 function filterTodos() {
-  const allCheckbox = document.querySelector("#all-checkbox");
-  const openCheckbox = document.querySelector("#open-checkbox");
-  const doneCheckbox = document.querySelector("#done-checkbox");
+  //alle radio buttons ansprechen
+  const all = document.querySelector("#all-checkbox");
+  const open = document.querySelector("#open-checkbox");
+  const done = document.querySelector("#done-checkbox");
   let filteredTodos;
 
   // Wenn button all ist checked
-  if (allCheckbox.checked) {
+  if (all.checked) {
     // Zeige alle Todos
     filteredTodos = state.todos;
 
     // Wenn button open ist checked
-  } else if (openCheckbox.checked) {
+  } else if (open.checked) {
     // Zeige nur offene Todos
     filteredTodos = state.todos.filter(function (todo) {
       return !todo.done;
     });
 
     // Wenn button done ist checked
-  } else if (doneCheckbox.checked) {
+  } else if (done.checked) {
     // Zeige nur erledigte Todos
     filteredTodos = state.todos.filter(function (todo) {
       return todo.done;
