@@ -82,18 +82,23 @@ function addTodo(event) {
 
   // Prüfung auf doppelte Eingabe, ist Todo bereits vorhanden?
   function isDescrDoubled(currInput) {
-    for (let index = 0; index < state.todos.length; index++) {
-      //durch Array itterieren und aktuellen index mit input vergleichen
-      if (
-        state.todos[index].description.toLowerCase() === currInput.toLowerCase()
-      ) {
+    for (const todo of state.todos) {
+      // alle einträge anschauen und mit input vergleichen case-insenstitive!!
+      if (todo.description.toLowerCase() === currInput.toLowerCase()) {
         return true; // Duplikat gefunden
       }
     }
     return false; // Kein Duplikat gefunden
   }
 
-  const isDoubled = isDescrDoubled(description); // Konstante für Funktion (zu kompliziert?)
+  /*function isDescrDoubled(currInput) {
+    for (let index = 0; index < state.todos.length; index++) {
+      //durch Array itterieren und aktuellen index mit input vergleichen
+      if (
+        state.todos[index].description.toLowerCase() === currInput.toLowerCase()
+      ) .... */
+
+  const isDoubled = isDescrDoubled(description); // Konstante für Funktion mit description (=currInput.value) des todos als Parameter
 
   if (isDoubled) {
     alert("Aufgabe existiert bereits!"); //error, warn => kein Pop-up
@@ -156,10 +161,12 @@ function removeDoneTodos() {
 
 //Filter function
 function filterTodos() {
-  //alle radio buttons ansprechen
+  // alle radio buttons ansprechen
   const all = document.querySelector("#all-checkbox");
   const open = document.querySelector("#open-checkbox");
   const done = document.querySelector("#done-checkbox");
+
+  // variable für gefilterte Todos erstellen
   let filteredTodos;
 
   // Wenn button all ist checked
@@ -182,7 +189,7 @@ function filterTodos() {
     });
   }
 
-  // Aktualisiere die Anzeige mit den gefilterten Todos
+  // Aktualisiere die Anzeige mit den gefilterten Todos, Variable als Parameter mitgeben
   showFilteredTodos(filteredTodos);
 }
 
