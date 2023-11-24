@@ -30,8 +30,11 @@ function showTodos() {
     const newTodoLi = document.createElement("li");
 
     const checkbox = document.createElement("input");
+    //Klasse vergeben
+    checkbox.setAttribute = ("class", "todo-checkbox");
     // type festlegen
     checkbox.type = "checkbox";
+
     // checked atrribute mit key done verbinden
     checkbox.checked = todo.done;
 
@@ -45,6 +48,7 @@ function showTodos() {
     const label = document.createElement("label");
     label.textContent = todo.description;
     label.setAttribute("for", todo.id);
+    label.setAttribute("class", "todo");
 
     // checkbox in li anlegen
     newTodoLi.appendChild(checkbox);
@@ -143,24 +147,85 @@ function removeDoneTodos() {
 }
 
 //Filter function noch in Arbeit
-/* function filterTodo() {
-  const all = document.querySelector("#all-checkbox");
-  const open = document.querySelector("#open-checkbox");
-  const done = document.querySelector("#done-checkbox");
+function filterTodos() {
+  const allCheckbox = document.querySelector("#all-checkbox");
+  const openCheckbox = document.querySelector("#open-checkbox");
+  const doneCheckbox = document.querySelector("#done-checkbox");
+  let filteredTodos;
+
+  // Wenn button all ist checked
+  if (allCheckbox.checked) {
+    // Zeige alle Todos
+    filteredTodos = state.todos;
+
+    // Wenn button open ist checked
+  } else if (openCheckbox.checked) {
+    // Zeige nur offene Todos
+    filteredTodos = state.todos.filter(function (todo) {
+      return !todo.done;
+    });
+
+    // Wenn button done ist checked
+  } else if (doneCheckbox.checked) {
+    // Zeige nur erledigte Todos
+    filteredTodos = state.todos.filter(function (todo) {
+      return todo.done;
+    });
+  }
+
+  // Aktualisiere die Anzeige mit den gefilterten Todos
+  showFilteredTodos(filteredTodos);
 }
 
-function filterObj(e) {
-  let filteredTodo = [];
-  if (e.target.id === "open" && e.target.checked) {
-    for (const currentTodo of todos) {
-      if (!currentTodo.done) {
-        todos.push(currentTodo);
-      }
-    }
-    renderTodoList(filteredTodo);
+//function wie addTodos um gefilterte Todos zu zeigen => Parameter mitgeben
+function showFilteredTodos(filteredTodos) {
+  const list = document.querySelector("#todo-list");
+  list.innerHTML = "";
+
+  for (const todo of filteredTodos) {
+    const newTodoLi = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.done;
+
+    checkbox.addEventListener("change", function (event) {
+      const todoDoneState = event.target.checked;
+      todo.done = todoDoneState;
+      localStorage.setItem("state", JSON.stringify(state));
+      filterTodos(); // Filtern erneut aufrufen, um die Anzeige zu aktualisieren
+    });
+
+    const label = document.createElement("label");
+    label.textContent = todo.description;
+    label.setAttribute("for", todo.id);
+    label.setAttribute("class", "todo");
+
+    newTodoLi.appendChild(checkbox);
+    newTodoLi.appendChild(label);
+
+    list.appendChild(newTodoLi);
   }
 }
-*/
+
+// alle input types=radio ansprechen querySelectorAll('input[type="radio"]')
+const filterRadioButtons = document.querySelectorAll('input[type="radio"]');
+
+// schleife um alle radio buttons anzusehen und zu checken ob einer aktiv ist
+for (const radioButton of filterRadioButtons) {
+  // Event-Listener für die Filter-Radio-Buttons
+  radioButton.addEventListener("change", function () {
+    // Deaktiviere alle anderen Radio-Button
+    for (const otherRadioButton of filterRadioButtons) {
+      // wenn der andere aktive radio button nicht der geklickte radio button ist, dann stelle checked auf false
+      if (otherRadioButton !== radioButton) {
+        otherRadioButton.checked = false;
+      }
+    }
+
+    filterTodos();
+  });
+}
 
 // Änderungen im Local Storage speichern ???  Immer wenn sich allTodos ändert
 // Wann wird der State in den Local Storage gespeichert?

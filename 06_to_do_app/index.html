@@ -13,24 +13,24 @@
         <h1>Todo App</h1>
     </header>
     <main>
-        <form>
-            <div class="filter-bar">
+        <form class="filter-bar">
+            <div class="filter-all">
                 <label for="all-checkbox">All</label>
                 <input type="radio" id="all-checkbox" name="all-checkbox" />
             </div>
-            <div class="filter-bar">
+            <div class="filter-open">
                 <label for="open-checkbox">Open</label>
                 <input type="radio" id="open-checkbox" name="open-checkbox" />
-            </div class="filter-bar">
-            <div>
+            </div>
+            <div class="filter-done">
                 <label for="done-checkbox">Done</label>
                 <input type="radio" id="done-checkbox" name="done-checkbox" />
             </div>
         </form>
-        <button id="remove-btn">Remove done Todos</button>
+        <button id="remove-btn" class="remove-btn">Remove done Todos</button>
         <br>
-        <input type="text" id="new-todo" name="new-todo" placeholder="add new todo...">
-        <button id="add-btn">Add</button>
+        <input type="text" id="new-todo" class="input-field" name="new-todo" placeholder="add new todo...">
+        <button id="add-btn" class="add-btn">Add</button>
         <ul id="todo-list">
         </ul>
     </main>
